@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <ImageView
+        android:id="@+id/bt_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/bluetooth_status"
+        android:enabled="false"
+        android:src="@drawable/ic_volume_bluetooth_in_call" />
+
+    <TextView
+        android:id="@+id/bt_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/bt_image"
+        android:layout_marginTop="11dp"
+        android:layout_toRightOf="@+id/bt_image"
+        android:enabled="false"
+        android:text="@string/bluetooth_status"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <RelativeLayout
+        android:id="@+id/relativeAlarmTime"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_image"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="86dp"
+        android:background="@drawable/bg_time" >
+<!--         android:paddingLeft="40dp" > -->
+
+        <TextView
+            android:id="@+id/textAlarmTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="11:30"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#333"
+            android:textSize="60sp" />
+
+        <TextView
+            android:id="@+id/textAlarmTimePeriod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textAlarmTime"
+            android:layout_alignBottom="@+id/textAlarmTime"
+            android:layout_toRightOf="@+id/textAlarmTime"
+            android:text="am"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#333"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textAlarmTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/relativeAlarmTime"
+        android:layout_alignLeft="@+id/relativeAlarmTime"
+        android:layout_marginBottom="-85dp"
+        android:text="@string/Next_Alarm"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/buttonSyncAlarm"
+        android:onClick="syncAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonAddAlarm"
+        android:layout_alignBottom="@+id/buttonAddAlarm"
+        android:layout_alignRight="@+id/relativeAlarmTime"
+        android:text="@string/sync_alarm" />
+
+    <Button
+        android:id="@+id/buttonAddAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/relativeAlarmTime"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="105dp"
+        android:onClick="addAlarm"
+        android:text="@string/add_alarm_text" />
+
+</RelativeLayout>
