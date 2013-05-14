@@ -65,15 +65,7 @@ public class SettingsActivity extends PreferenceActivity {
         	Log.d(TAG, "false");
         }
         CheckBoxPreference btPersistChkbox = (CheckBoxPreference) getPreferenceManager().findPreference("bluetooth_persistance");
-
-//        btPersistChkbox.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {            
-//            public boolean onPreferenceChange(Preference preference, Object newValue) {
-//                Log.d("MyApp", "Pref " + preference.getKey() + " changed to " + newValue.toString());       
-//                return true;
-//            }
-//        }); 
-        
-        
+   
 		setupActionBar();
 	}
 
@@ -101,11 +93,9 @@ public class SettingsActivity extends PreferenceActivity {
 			//
 			// TODO: If Settings has multiple levels, Up should navigate up
 			// that hierarchy.
-			//Log.d("Settings", "Home selected");
+
 			NavUtils.navigateUpFromSameTask(this);
-//			Intent intent_main = new Intent(this, MainActivity.class);
-//			intent_main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//	        startActivity(intent_main);
+
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -140,19 +130,6 @@ public class SettingsActivity extends PreferenceActivity {
 		getPreferenceScreen().addPreference(fakeHeader);
 		addPreferencesFromResource(R.xml.pref_notification);
 
-		// Add 'data and sync' preferences, and a corresponding header.
-		//fakeHeader = new PreferenceCategory(this);
-		//fakeHeader.setTitle(R.string.pref_header_data_sync);
-		//getPreferenceScreen().addPreference(fakeHeader);
-		//addPreferencesFromResource(R.xml.pref_data_sync);
-
-		// Bind the summaries of EditText/List/Dialog/Ringtone preferences to
-		// their values. When their values change, their summaries are updated
-		// to reflect the new value, per the Android Design guidelines.
-		//bindPreferenceSummaryToValue(findPreference("bluetooth_persistance"));
-		//bindPreferenceSummaryToValue(findPreference("example_list"));
-		//bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
-		//bindPreferenceSummaryToValue(findPreference("sync_frequency"));
 	}
 
 	/** {@inheritDoc} */
@@ -330,12 +307,9 @@ public class SettingsActivity extends PreferenceActivity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 	    if (keyCode == KeyEvent.KEYCODE_BACK) {
-	        //moveTaskToBack(true);
+
 	    	NavUtils.navigateUpFromSameTask(this);
-//	    	Intent resultIntent = new Intent(this, MainActivity.class);
-//			resultIntent.putExtra("Alarms", alarms);
-//			setResult(Activity.RESULT_OK, resultIntent);
-//			finish();
+
 	        return true;
 	    }
 	    return super.onKeyDown(keyCode, event);

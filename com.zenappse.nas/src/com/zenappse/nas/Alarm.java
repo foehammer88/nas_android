@@ -68,15 +68,4 @@ public class Alarm implements Serializable{
 		alarmTime = alarmtime;
 	}
 
-//	@Override
-//	public int describeContents() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
-//	@Override
-//	public void writeToParcel(Parcel out, int flags) {
-//		// TODO Auto-generated method stub
-//		Log.v(TAG, "Write to Parcel..." + flags);
-//	}
 }

@@ -35,10 +35,10 @@ public class AlarmStorage {
     
     public AlarmStorage(Context context){
     	this.context = context;
-    	//mPrefs = getPreferences(Activity.MODE_PRIVATE);
+
     	mPrefs = context.getSharedPreferences(pref_name, Activity.MODE_PRIVATE);
-    	//mPrefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
-		Log.d("AlarmStorage", "Before edit");
+
+    	Log.d("AlarmStorage", "Before edit");
     	if (mPrefs != null){
     		Log.d("AlarmStorage", "In edit");
     		ed = mPrefs.edit();

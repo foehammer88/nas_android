@@ -69,7 +69,7 @@ public class BluetoothHandler implements Serializable{
 		    // Loop through paired devices
 		    for (BluetoothDevice device : pairedDevices) {
 		        // Add the name and address to an array adapter to show in a ListView
-		        //mArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+
 		    	deviceName = device.getName();
 		    	deviceAddress = device.getAddress();
 		    	btDevice = device;
@@ -94,11 +94,11 @@ public class BluetoothHandler implements Serializable{
 	
 			//code to send string from my android handset to another
 			OutputStream outputStream = btSocket.getOutputStream();
-			//String message = "Data from Android\n"; 
+
 			Log.d(TAG, msg);
 			outputStream.write(msg.getBytes()); 
 			btSocket.close();
-			//Toast.makeText(act.getBaseContext(), "Bluetooth message sent sucessfully.", Toast.LENGTH_LONG).show();
+
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,7 +118,6 @@ public class BluetoothHandler implements Serializable{
 			return false;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			//Toast.makeText(act.getBaseContext(), "Bluetooth message not sent, try again.", Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 			return false;
 		}

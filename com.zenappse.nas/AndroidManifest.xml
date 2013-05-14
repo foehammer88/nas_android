@@ -32,10 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--         <activity -->
-<!--             android:name="com.zenappse.nas.SettingsActivity" -->
-<!--             android:label="@string/title_activity_settings" > -->
-<!--         </activity> -->
+
         <activity android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName="com.zenappse.nas.SettingsActivity">
@@ -71,17 +68,4 @@
     </application>
 
 </manifest>
-<!-- ======= -->
-<!-- <manifest xmlns:android="http://schemas.android.com/apk/res/android" > -->
 
-<!--     <application> -->
-<!--         <activity android:name=".SettingsActivity" -->
-<!--             android:label="@string/title_activity_settings" -->
-<!--             android:parentActivityName="com.zenappse.nas.SettingsActivity"> -->
-<!--             <meta-data android:name="android.support.PARENT_ACTIVITY" -->
-<!--                 android:value="com.zenappse.nas.SettingsActivity" /> -->
-<!--         </activity> -->
-<!--     </application> -->
-
-<!-- </manifest> -->
-<!-- >>>>>>> Added -->

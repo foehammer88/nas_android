@@ -53,7 +53,7 @@ public class AlarmsActivity extends Activity {
 	final private int ALARM_ADD_ID = 1000;
 	final private String TAG = "Alarms Activity";
 	final private String key = "alarmslist";
-	//ArrayAdapter<Alarm> alarmsAdapter = new ArrayAdapter<Alarm>(this, android.R.layout.activity_list_item);
+
 	public ArrayList<Alarm> alarms = new ArrayList<Alarm>();
 	public Alarm alarmTime;
 	ListView alarmsList;
@@ -64,11 +64,7 @@ public class AlarmsActivity extends Activity {
 	private static final String APP_SHARED_PREFS = AlarmsActivity.class.getSimpleName(); //  Name of the file -.xml
     
 	AlarmStorage alarmStorage;
-	
-//	SharedPreferences mPrefs;
-//    SharedPreferences.Editor ed;
-//    ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-	
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,12 +73,10 @@ public class AlarmsActivity extends Activity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		alarmsList = (ListView) findViewById(R.id.listViewAlarms);
 		alarmsList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-		//this.registerForContextMenu(alarmsList);
+
 		context = this;
 		
 		alarmStorage = new AlarmStorage(getApplicationContext());
-//		mPrefs = getPreferences(MODE_PRIVATE);
-//		ed = mPrefs.edit();
 		
 		ArrayList<Alarm> alarmsTemp = (ArrayList<Alarm>) this.getIntent().getSerializableExtra("Alarms");
 		if(alarmsTemp != null){
@@ -98,92 +92,10 @@ public class AlarmsActivity extends Activity {
 				alarmsList.setAdapter(alarmsAdapter);
 			}
 		}
-//		alarmTime = (Alarm) this.getIntent().getSerializableExtra("Alarm");
-//		if ( alarmTime != null){
-//			parseAlarm("H:mm");
-//			alarms.add(alarmTime);
-//			AlarmAdapter alarmsAdapter = new AlarmAdapter(this, android.R.layout.simple_list_item_1, alarms);
-//			alarmsList.setAdapter(alarmsAdapter);			   
-//		}
+
 		setupContextMenu();
 	}
 
-//    private void storeAlarms(ArrayList<Alarm> alarms) {
-//    	ObjectOutputStream objectOutput;
-//        try {
-//            objectOutput = new ObjectOutputStream(arrayOutputStream);
-//            objectOutput.writeObject(alarms);
-//            byte[] data = arrayOutputStream.toByteArray();
-//            objectOutput.close();
-//            arrayOutputStream.close();
-//
-//            ByteArrayOutputStream out = new ByteArrayOutputStream();
-//            Base64OutputStream b64 = new Base64OutputStream(out, Base64.DEFAULT);
-//            b64.write(data);
-//            b64.close();
-//            out.close();
-//
-//            ed.putString(key, new String(out.toByteArray()));
-//
-//            ed.commit();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//		
-//	}
-//    
-//	private ArrayList<Alarm> retrieveAlarms() {
-//    	byte[] bytes = mPrefs.getString(key, "{}").getBytes();
-//        if (bytes.length == 0) {
-//            return null;
-//        }
-//        ByteArrayInputStream byteArray = new ByteArrayInputStream(bytes);
-//        Base64InputStream base64InputStream = new Base64InputStream(byteArray, Base64.DEFAULT);
-//        ObjectInputStream in;
-//        ArrayList<Alarm> myAlarms = null;
-//        try {
-//			in = new ObjectInputStream(base64InputStream);
-//			myAlarms = (ArrayList<Alarm>) in.readObject();
-//		} catch (StreamCorruptedException e) {
-//			// TODO Auto-generated catch block
-//			myAlarms = null;
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			myAlarms = null;
-//			e.printStackTrace();
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			myAlarms = null;
-//			e.printStackTrace();
-//		}
-//		return myAlarms;
-//	}
-
-
-
-//	@Override
-//	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-//	    super.onCreateContextMenu(menu, v, menuInfo);
-//	    Log.d(TAG, "Long clicked item");
-//	    menu.setHeaderTitle("Menu"); //getString(R.string.menu_alarms_context_title));
-//	    MenuInflater inflater = getMenuInflater();
-//	    inflater.inflate(R.menu.alarms_contexual_menu, menu);
-//	}
-//
-//	@Override
-//	public boolean onContextItemSelected(MenuItem item) {
-//	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-//
-//	    switch (item.getItemId()) {
-//	    case R.id.menu_delete_alarm:
-//	    	Log.d(TAG, "Delete clicked");
-//	        // do something useful
-//	        return true;
-//	    default:
-//	        return super.onContextItemSelected(item);
-//	    }
-//	}
 	
 	private void setupContextMenu() {
 		// TODO Auto-generated method stub
@@ -194,7 +106,6 @@ public class AlarmsActivity extends Activity {
 		                                      long id, boolean checked) {
 		    	Log.d(TAG, "Position clicked: " + position);
 		    	
-		    	//alarmsList.getItemAtPosition(position);
 		    	Log.d(TAG, "Checked Status: " + checked);
 		    	if(checked){
 		    		
@@ -204,26 +115,15 @@ public class AlarmsActivity extends Activity {
 		    		} else {
 		    			selectedPositions.add(position);
 		    		}
-		    		
-		    		//Drawable selectedBG = getResources().getDrawable(R.drawable.bg_time_highlighted);
-		    		//Log.d(TAG, "BG Change");
-		    	//	alarmsList.getChildAt(position).setBackground(selectedBG);
+		    
 		    	} else {
 		    		
 		    		if( selectedPositions != null){
 		    			selectedPositions.remove(new Integer(position));
 		    		}
-		    		//Drawable unselectedBG = getResources().getDrawable(R.drawable.bg_time);
-		    	//	alarmsList.getChildAt(position).setBackground(unselectedBG);
 		    	}
 		    	Log.d(TAG, "selectedPositions: " + selectedPositions.toString());
-		    	//View alarmItemView = alarmsAdapter.getView(position, alarmsList, alarmsList);
-		    	//alarmItemView.setBackground(selectedBG);
-		    	//RelativeLayout item = (RelativeLayout) findViewById((int) id);
-		    	//if(item != null){
-		    	//	Log.d(TAG, item.toString());
-		    	//	item.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_time_highlighted));
-		    	//}
+		    	
 		    	Alarm alarmItem = (Alarm) alarmsList.getItemAtPosition(position);
 		    	Log.d(TAG, alarmItem.getAlarmString(new SimpleDateFormat("H:mm")));
 		        // Here you can do something when items are selected/de-selected,
@@ -235,11 +135,10 @@ public class AlarmsActivity extends Activity {
 		        // Respond to clicks on the actions in the CAB
 		        switch (item.getItemId()) {
 		            case R.id.menu_delete_alarm:
-		                //deleteSelectedItems();
+
 		            	Log.d(TAG, "Delete clicked");
 		            	ArrayList<Alarm> tempAlarms = new ArrayList<Alarm>();
 		            	
-//		            	alarms = tempAlarms;
 		            	Collections.sort(selectedPositions);
 		            	Collections.reverse(selectedPositions);
 		            	Log.d(TAG, "Positions to delete: " + selectedPositions.toString());
@@ -252,11 +151,7 @@ public class AlarmsActivity extends Activity {
 		    			alarmStorage.storeAlarms(alarms);
 		                mode.finish(); // Action picked, so close the CAB
 		                return true;
-//		            case R.id.menu_edit_alarm:
-//		                //deleteSelectedItems();
-//		            	Log.d(TAG, "Edit clicked");
-//		                mode.finish(); // Action picked, so close the CAB
-//		                return true;
+
 		            default:
 		                return false;
 		        }
@@ -320,13 +215,7 @@ public class AlarmsActivity extends Activity {
 	        	Intent intent_alarm = new Intent(this, AlarmActivity.class);
 	        	intent_alarm.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	            startActivityForResult(intent_alarm, ALARM_ID);
-	            
-//	        	String nextAlarm = Settings.System.getString(getContentResolver(),
-//	        		    Settings.System.NEXT_ALARM_FORMATTED);
-//	        	TextView t = new TextView(this);
-//	        	t=(TextView)findViewById(R.id.test_text); 
-//	        	t.setText(nextAlarm);
-	        	
+	          
 	            return true;
 		 case R.id.menu_settings:
 	            // app icon in action bar clicked; go home

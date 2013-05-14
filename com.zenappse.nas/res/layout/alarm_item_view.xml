@@ -30,15 +30,7 @@
         android:focusable="false"
         android:textColor="#fff"
         android:textSize="20sp" />
-<!-- <LinearLayout  -->
-<!--     android:layout_alignBottom="@+id/textAlarmItemTimePeriod" -->
-<!--         android:layout_alignParentRight="true" -->
-<!--         android:layout_marginBottom="12dp" -->
-<!--         android:layout_marginRight="21dp" -->
-<!--         android:layout_width="wrap_content" -->
-<!--         android:layout_height="wrap_content" -->
-       
-<!--     > -->
+
 
     <CheckBox
         android:layout_alignBottom="@+id/textAlarmItemTimePeriod"
@@ -51,5 +43,4 @@
        	android:focusable="false"
          />
 
-<!-- </LinearLayout> -->
 </RelativeLayout>

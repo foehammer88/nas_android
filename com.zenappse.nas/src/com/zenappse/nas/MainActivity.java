@@ -63,8 +63,6 @@ public class MainActivity extends Activity {
 	private boolean isFreqSent = false;
 	
 	SharedPreferences sharedPreferences;
-//    SharedPreferences.Editor ed;
-//    ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,8 +101,6 @@ public class MainActivity extends Activity {
 		//Set preferences
 		handlePreferences();
 		
-		//mPrefs = getPreferences(MODE_PRIVATE);
-		//ed = mPrefs.edit();
 		alarmStorage = new AlarmStorage(getApplicationContext());
 		setCurrentTime();
 		//If alarms is empty
@@ -146,7 +142,7 @@ public class MainActivity extends Activity {
 					}
 			        Log.d("BT_Thread", "SPD " + vibrateFreq);
 			        sendMessage("SPD " + vibrateFreq + "\r\n");
-					//btHandler.sendMessage("SPD " + vibrateFreq + "\r\n");
+
 			    }
 			};
 			btThread.start();
@@ -185,12 +181,7 @@ public class MainActivity extends Activity {
 	        case ALARM_ID:
 	            // app icon in action bar clicked; go home
 	        	Log.d("Main", "Alarms click");
-//	        	String nextAlarm = Settings.System.getString(getContentResolver(),
-//	        		    Settings.System.NEXT_ALARM_FORMATTED);
-//	        	TextView t = new TextView(this);
 	        	startAlarmsActivity();
-	        	//t=(TextView)findViewById(R.id.test_text); 
-	        	//t.setText(nextAlarm);
 	        	
 	            return true;
 	        case R.id.menu_settings:
@@ -205,22 +196,8 @@ public class MainActivity extends Activity {
 	            // app icon in action bar clicked; go home
 	        	Log.d("Main", "Alarms click");
 	        	startAlarmsActivity();
-//	            Intent intent_alarms = new Intent(this, AlarmsActivity.class);
-//	            intent_alarms.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//	            if(alarms != null){
-//	            	intent_alarms.putExtra("Alarms", alarms);
-//	            }
-//	            startActivityForResult(intent_alarms, ALARMS_ID);
 	        	
 	            return true;
-//	        case R.id.menu_bluetooth:
-//	            // app icon in action bar clicked; go home
-//	        	Log.d("Main", "Bluetooth click");
-//	            Intent intent_bluetooth = new Intent(this, BluetoothActivity.class);
-//	            intent_bluetooth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//	            startActivity(intent_bluetooth);
-//	        	
-//	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
@@ -236,7 +213,6 @@ public class MainActivity extends Activity {
 	}
 	
 	public void syncDevice(View view){
-		//initialize();
 		
 		if(btHandler.isPaired()){
 			Thread btThread = new Thread(){
@@ -250,23 +226,12 @@ public class MainActivity extends Activity {
 					}
 				        Log.d("BT_Thread", "SPD " + vibrateFreq);
 				        sendMessage("SPD " + vibrateFreq + "\r\n");
-						//btHandler.sendMessage("SPD " + vibrateFreq + "\r\n");
 				    }
 				};
 			btThread.start();
     	}
 		setAlarm(alarms);
 		sendCurrentTime();
-		//alarms = alarmStorage.retrieveAlarms();
-		//if(alarms != null){
-		//	Log.d(TAG, alarms.toString());
-		//	setAlarm(alarms);
-		//} 
-		/*Intent intent_alarm = new Intent(this, AlarmActivity.class);
-    	intent_alarm.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent_alarm);*/
-		
-		//btHandler.sendMessage("Hello World\n");
 	}
 	
 	public void syncAlarm(View view){
@@ -379,18 +344,15 @@ public class MainActivity extends Activity {
 					}
 			        Log.d("BT_Thread", "ALR " + aTime);
 			        sendMessage("ALR " + aTime + "\r\n");
-					//btHandler.sendMessage("ALR " + aTime + "\r\n");
 			    }
 			};
 			btThread.start();
 			Log.d(TAG, "Outside BT thread");
-			//btHandler.sendMessage("ALR " + aTime + "\n");
 		}
 		nextAlarmStr = aTime;
 	}
 	
 	public void sendNotification(String type, String msgSource, String msgBody){
-		//Log.d(TAG, type + ": " + msgSource + " : " + msgBody);
 		if (type.equals("sms")){
 						
 			//final String message =  getContactName(msgSource) + "\r" + msgBody;
@@ -413,7 +375,6 @@ public class MainActivity extends Activity {
 				    public void run() {
 				        Log.d("BT_Thread", "MSG " + message);
 				        sendMessage("MSG " + message + "\r\n");
-						//btHandler.sendMessage("MSG " + message + "\r\n");
 				    }
 				};
 				btThread.start();
@@ -471,7 +432,6 @@ public class MainActivity extends Activity {
 	    	  Log.d(TAG, "Alarms returned");
 	    	  handlePreferences();
 	    	  alarms = (ArrayList<Alarm>) data.getSerializableExtra("Alarms");
-	    	  //setAlarm(alarms);
 	    	  
 	    	  Log.d(TAG, alarms.toString());
 	    	  if (alarms != null){
@@ -513,13 +473,11 @@ public class MainActivity extends Activity {
 	    	handlePreferences();
 		      if (resultCode == Activity.RESULT_OK) {
 		    	  Log.d(TAG, "Settings returned, result ok");
-		    	  //handlePreferences();
 		    	  
 		      } 
 		      break; 
 		}
 	    default:
-	    	//Log.d(TAG, "Default return: " + requestCode);
 	  } 
 	}
 	
@@ -544,10 +502,6 @@ public class MainActivity extends Activity {
 	
 	public void sendMessage(String msg){
 		String msgType = msg.substring(0, 3);
-//		isAlarmSent = false;
-//		isTextSent = false;
-//		isControlSent = false;
-//		isFreqSent = false;
 		if (btHandler.sendMessage(msg)){
 			runOnUiThread(new Runnable() {
 			    public void run() {
@@ -581,31 +535,4 @@ public class MainActivity extends Activity {
 		}
 		
 	}
-//	private ArrayList<Alarm> retrieveAlarms() {
-//    	byte[] bytes = mPrefs.getString(key, "{}").getBytes();
-//        if (bytes.length == 0) {
-//            return null;
-//        }
-//        ByteArrayInputStream byteArray = new ByteArrayInputStream(bytes);
-//        Base64InputStream base64InputStream = new Base64InputStream(byteArray, Base64.DEFAULT);
-//        ObjectInputStream in;
-//        ArrayList<Alarm> myAlarms = null;
-//        try {
-//			in = new ObjectInputStream(base64InputStream);
-//			myAlarms = (ArrayList<Alarm>) in.readObject();
-//		} catch (StreamCorruptedException e) {
-//			// TODO Auto-generated catch block
-//			myAlarms = null;
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			myAlarms = null;
-//			e.printStackTrace();
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			myAlarms = null;
-//			e.printStackTrace();
-//		}
-//		return myAlarms;
-//	}
 }

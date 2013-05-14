@@ -31,26 +31,12 @@ public class AlarmActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_alarm, menu);
 		return true;
 	}
-	
-//	@Override
-//	public void onBackPressed(){
-//		
-//	}
-	
+		
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		//Log.d("Item ID", item.getItemId());
 	    switch (item.getItemId()) {
 	    	
 	        case android.R.id.home:
-	            // app icon in action bar clicked; go home
-//	            Intent intent = new Intent(this, AlarmsActivity.class);
-//	            Bundle b = new Bundle();
-//	            b.putParcelable(Alarm.ALARM, alarm);
-//	            intent.putExtras(b);
-//	            intent.putExtra("Alarm", alarm);
-//	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//	            startActivity(intent);
 	        	finish();
 	            return true;
 	        case R.id.menu_settings:
@@ -61,14 +47,6 @@ public class AlarmActivity extends Activity {
 	            startActivity(intent_settings);
 	        	
 	            return true;
-//	        case R.id.menu_bluetooth:
-//	            // app icon in action bar clicked; go home
-//	        	Log.d("Main", "Settings click");
-//	            Intent intent_bluetooth = new Intent(this, BluetoothActivity.class);
-//	            intent_bluetooth.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//	            startActivity(intent_bluetooth);
-//	        	
-//	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
@@ -85,7 +63,7 @@ public class AlarmActivity extends Activity {
 		alarmTime.set(Calendar.MINUTE, minute.intValue());
 		
 		alarm = new Alarm(alarmTime);
-		//alarm.setAlarm(alarmTime);
+
 		Intent resultIntent = new Intent(this, AlarmsActivity.class);
 		resultIntent.putExtra("Alarm", alarm);
 		setResult(Activity.RESULT_OK, resultIntent);
