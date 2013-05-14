@@ -1,14 +1,17 @@
 package com.zenappse.nas;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -18,6 +21,7 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 
@@ -42,10 +46,34 @@ public class SettingsActivity extends PreferenceActivity {
 	 * shown on tablets.
 	 */
 	private static final boolean ALWAYS_SIMPLE_PREFS = false;
-
+	private static String TAG = "Settings_Activity";
+	
+	private SharedPreferences sharedPreferences;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		//PreferenceManager.setDefaultValues(this, R.xml.pref_notification, true);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        //boolean autoStart = sharedPreferences.getBoolean("notifications_email", true);
+
+        boolean value = sharedPreferences.getBoolean("bluetooth_persistance", true);
+        if( value){
+        	Log.d(TAG, "true");
+        }else{
+        	Log.d(TAG, "false");
+        }
+        CheckBoxPreference btPersistChkbox = (CheckBoxPreference) getPreferenceManager().findPreference("bluetooth_persistance");
+
+//        btPersistChkbox.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {            
+//            public boolean onPreferenceChange(Preference preference, Object newValue) {
+//                Log.d("MyApp", "Pref " + preference.getKey() + " changed to " + newValue.toString());       
+//                return true;
+//            }
+//        }); 
+        
+        
 		setupActionBar();
 	}
 
@@ -105,7 +133,7 @@ public class SettingsActivity extends PreferenceActivity {
 
 		// Add 'general' preferences.
 		addPreferencesFromResource(R.xml.pref_general);
-
+		
 		// Add 'notifications' preferences, and a corresponding header.
 		PreferenceCategory fakeHeader = new PreferenceCategory(this);
 		fakeHeader.setTitle(R.string.pref_header_notifications);
@@ -113,18 +141,18 @@ public class SettingsActivity extends PreferenceActivity {
 		addPreferencesFromResource(R.xml.pref_notification);
 
 		// Add 'data and sync' preferences, and a corresponding header.
-		fakeHeader = new PreferenceCategory(this);
-		fakeHeader.setTitle(R.string.pref_header_data_sync);
-		getPreferenceScreen().addPreference(fakeHeader);
-		addPreferencesFromResource(R.xml.pref_data_sync);
+		//fakeHeader = new PreferenceCategory(this);
+		//fakeHeader.setTitle(R.string.pref_header_data_sync);
+		//getPreferenceScreen().addPreference(fakeHeader);
+		//addPreferencesFromResource(R.xml.pref_data_sync);
 
 		// Bind the summaries of EditText/List/Dialog/Ringtone preferences to
 		// their values. When their values change, their summaries are updated
 		// to reflect the new value, per the Android Design guidelines.
-		bindPreferenceSummaryToValue(findPreference("example_text"));
-		bindPreferenceSummaryToValue(findPreference("example_list"));
-		bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
-		bindPreferenceSummaryToValue(findPreference("sync_frequency"));
+		//bindPreferenceSummaryToValue(findPreference("bluetooth_persistance"));
+		//bindPreferenceSummaryToValue(findPreference("example_list"));
+		//bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
+		//bindPreferenceSummaryToValue(findPreference("sync_frequency"));
 	}
 
 	/** {@inheritDoc} */
@@ -171,8 +199,10 @@ public class SettingsActivity extends PreferenceActivity {
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object value) {
 			String stringValue = value.toString();
-
+			Log.d(TAG, stringValue);
+			Log.d(TAG, preference.toString());
 			if (preference instanceof ListPreference) {
+				
 				// For list preferences, look up the correct display value in
 				// the preference's 'entries' list.
 				ListPreference listPreference = (ListPreference) preference;
@@ -209,6 +239,7 @@ public class SettingsActivity extends PreferenceActivity {
 			} else {
 				// For all other preferences, set the summary to the value's
 				// simple string representation.
+				Log.d(TAG, stringValue);
 				preference.setSummary(stringValue);
 			}
 			return true;
@@ -295,5 +326,18 @@ public class SettingsActivity extends PreferenceActivity {
 			// guidelines.
 			bindPreferenceSummaryToValue(findPreference("sync_frequency"));
 		}
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if (keyCode == KeyEvent.KEYCODE_BACK) {
+	        //moveTaskToBack(true);
+	    	NavUtils.navigateUpFromSameTask(this);
+//	    	Intent resultIntent = new Intent(this, MainActivity.class);
+//			resultIntent.putExtra("Alarms", alarms);
+//			setResult(Activity.RESULT_OK, resultIntent);
+//			finish();
+	        return true;
+	    }
+	    return super.onKeyDown(keyCode, event);
 	}
 }

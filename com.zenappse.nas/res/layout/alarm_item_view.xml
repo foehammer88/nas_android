@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical"
+	 
+	android:background="?android:attr/activatedBackgroundIndicator">
+  
+	<TextView
+         android:id="@+id/textAlarmItemTime"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentTop="true"
+         android:paddingLeft="20dp"
+         android:text="11:30"
+         android:textAppearance="?android:attr/textAppearanceLarge"
+         android:textColor="#fff"
+         android:focusable="false"
+         android:textSize="60sp" />
+
+    <TextView
+        android:id="@+id/textAlarmItemTimePeriod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textAlarmItemTime"
+        android:layout_alignBottom="@+id/textAlarmItemTime"
+        android:layout_toRightOf="@+id/textAlarmItemTime"
+        android:text="am"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:focusable="false"
+        android:textColor="#fff"
+        android:textSize="20sp" />
+<!-- <LinearLayout  -->
+<!--     android:layout_alignBottom="@+id/textAlarmItemTimePeriod" -->
+<!--         android:layout_alignParentRight="true" -->
+<!--         android:layout_marginBottom="12dp" -->
+<!--         android:layout_marginRight="21dp" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+       
+<!--     > -->
+
+    <CheckBox
+        android:layout_alignBottom="@+id/textAlarmItemTimePeriod"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="21dp"
+        android:id="@+id/checkBoxAlarmItemEnabled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       	android:focusable="false"
+         />
+
+<!-- </LinearLayout> -->
+</RelativeLayout>

@@ -13,9 +13,23 @@
     <string name="devices_found">Bluetooth devices found</string>
     <string name="menu_bluetooth">Bluetooth</string>
     <string name="title_activity_alarm">Add Alarm</string>
-    <string name="add_alarm_text">Add Alarm</string>
+    <string name="sync_device_text">Sync Device</string>
     <string name="sync_alarm">Sync Alarm</string>
+    <string name="add_alarm_text">Add Alarm</string>
     <string name="remove_alarm">Remove Alarm</string>
     <string name="Next_Alarm">Next Alarm</string>
+    <string name="title_activity_alarms_list">AlarmsListActivity</string>
 
+    <string name="slider_title">Vibration Period</string>
+	<string-array name="slider_summaries">
+	    <!-- You can define as many summaries as you'd like -->
+	    <!-- The active summary will reflect the preference's current value -->
+	    <item>Fastest</item> <!-- 0.00 to 0.25 -->
+	    <item>Fast</item>   <!-- 0.25 to 0.50 -->
+	    <item>Slow</item>     <!-- 0.50 to 0.75 -->
+	    <item>Slowest</item>  <!-- 0.75 to 1.00 -->
+	</string-array>
+	<item name="slider_default" format="float" type="string">0.5</item>
+	<string name="slider_message">Select the period of the vibration of the bed shaker.</string>
+    
 </resources>

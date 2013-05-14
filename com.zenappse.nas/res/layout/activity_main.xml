@@ -76,19 +76,19 @@
         android:onClick="syncAlarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonAddAlarm"
-        android:layout_alignBottom="@+id/buttonAddAlarm"
+        android:layout_alignBaseline="@+id/buttonSyncDevice"
+        android:layout_alignBottom="@+id/buttonSyncDevice"
         android:layout_alignRight="@+id/relativeAlarmTime"
         android:text="@string/sync_alarm" />
 
     <Button
-        android:id="@+id/buttonAddAlarm"
+        android:id="@+id/buttonSyncDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/relativeAlarmTime"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="105dp"
-        android:onClick="addAlarm"
-        android:text="@string/add_alarm_text" />
+        android:onClick="syncDevice"
+        android:text="@string/sync_device_text" />
 
 </RelativeLayout>
