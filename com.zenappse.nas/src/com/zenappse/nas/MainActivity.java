@@ -37,6 +37,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+
+/**
+ * @author Patrick Ganson
+ * @version 1.0
+ * 
+ * Main controller class for the home screen of the app.
+ * Contains many methods for navigation and control of the app.
+ * Calls Bluetooth handler that actually sends method.
+ * Determines which alarm of the alarms list, that is retrieved 
+ * from storage, that will be the next alarm to get sent.
+ */
 public class MainActivity extends Activity {
 
 	private final static int ALARM_ID = 1;
@@ -96,6 +107,10 @@ public class MainActivity extends Activity {
 		
 	}
 
+	/**
+	 * Intializes the app for retrieving the alarms list
+	 * and sets the current time to the device.
+	 */
 	private void initialize() {
 		// TODO Auto-generated method stub
 		//Set preferences
@@ -115,6 +130,11 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Retrieves the user preferences that get set in SettingsActivity
+	 * and stores the preferences in class variables.
+	 * Sends the vibration frequency to the device.
+	 */
 	private void handlePreferences() {
 		// TODO Auto-generated method stub
 		
@@ -168,6 +188,9 @@ public class MainActivity extends Activity {
 	}
 
 	@Override
+	/**
+	 * Sets up the menu on the action bar.
+	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		//Log.d("Item ID", item.getItemId());
 	    switch (item.getItemId()) {
@@ -203,6 +226,11 @@ public class MainActivity extends Activity {
 	    }
 	}
 	
+	/**
+	 * Method to navigate to the Alarms Activity
+	 * Sends the list of alarms to the Alarms Activity
+	 * to populate the Alarms List View.
+	 */
 	public void startAlarmsActivity(){
 		Intent intent_alarms = new Intent(this, AlarmsActivity.class);
         intent_alarms.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -212,6 +240,13 @@ public class MainActivity extends Activity {
         startActivityForResult(intent_alarms, ALARMS_ID);
 	}
 	
+	/**
+	 * Syncs the device when the button is pressed.
+	 * Sends the vibration frequency to the device, along
+	 * with the alarm and current time. Should be used if
+	 * any bluetooth message send fails
+	 * @param view
+	 */
 	public void syncDevice(View view){
 		
 		if(btHandler.isPaired()){
@@ -234,6 +269,13 @@ public class MainActivity extends Activity {
 		sendCurrentTime();
 	}
 	
+	/**
+	 * Method gets called when button is pressed.
+	 * If there is a OS alarm, sets that as the next alarm.
+	 * Otherwise, retrieves the next alarm from the in app alarms
+	 * list. If no alarm is found, then shows the current time.
+	 * @param view
+	 */
 	public void syncAlarm(View view){
 		String nextAlarm = Settings.System.getString(getContentResolver(), Settings.System.NEXT_ALARM_FORMATTED);
 		if (nextAlarm.length()==0 || nextAlarm == "") {
@@ -275,6 +317,12 @@ public class MainActivity extends Activity {
 	    }
 	}
 	
+	/**
+	 * Sends the current time to the device as a control signal
+	 * to sync the time of the device with the phone.
+	 * 
+	 * Message format: "CON H:mm", 
+	 */
 	public void sendCurrentTime(){
 		Calendar c = Calendar.getInstance(); 
 		Date currentDate = c.getTime();
@@ -303,6 +351,10 @@ public class MainActivity extends Activity {
 		
 	}
 	
+	/**
+	 * Gets the current time from the device and converts it to the
+	 * Correct String format and displays it on the home screen.
+	 */
 	public void setCurrentTime(){
 		Calendar c = Calendar.getInstance(); 
 		Date currentDate = c.getTime();
@@ -318,6 +370,13 @@ public class MainActivity extends Activity {
 		
 	}
 	
+	/**
+	 * Sets the alarm given in the parameter to the main screen
+	 * in the proper String format, and sends the alarm time to
+	 * the device in the following format.
+	 * 
+	 * Ex: "ALR H:mm" in 24 hour time format
+	 */
 	public void setAlarmTime(Alarm nextAlarm){
 		Date nextAlarmDate = nextAlarm.getAlarm().getTime();
 		String currentTime = new SimpleDateFormat("h:mm").format(nextAlarmDate);
@@ -352,6 +411,16 @@ public class MainActivity extends Activity {
 		nextAlarmStr = aTime;
 	}
 	
+	/**
+	 * Method that formats a text message, including the sender,
+	 * into a format that is supported by the device. And then sends
+	 * that message to the device. The string can only be 32 visible
+	 * characters long, 16 chars for the top line of the display, 
+	 * which is the sender, and 16 chars for the bottom line,
+	 * for a snippet of the body of the text message.
+	 * 
+	 * Ex. "MSG <16 chars>/r<16 chars>/r/n"
+	 */
 	public void sendNotification(String type, String msgSource, String msgBody){
 		if (type.equals("sms")){
 						
@@ -385,7 +454,16 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	
+	/**
+	 * Method that receives an ArrayList of alarms and performs
+	 * an algorithm which determines which alarm, from the given list,
+	 * is the next alarm from the current time. It then calls setAlarmTime()
+	 * to set the alarm on the home screen and send it to the device.
+	 * If no alarms are found, then it produces a toast notification of "No
+	 * alarms found"
+	 * 
+	 * @param alarms
+	 */
 	public void setAlarm(ArrayList<Alarm> alarms){
 		ArrayList<Alarm> validAlarms = new ArrayList<Alarm>();
   		Calendar currCalendar = Calendar.getInstance();
@@ -423,6 +501,11 @@ public class MainActivity extends Activity {
 	}
 	
 	@Override 
+	/**
+	 * Method that handles the return to the main screen,
+	 * either from the AlarmsActivity, the Bluetooth enabler popup, 
+	 * or from the settings.
+	 */
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {     
 	  super.onActivityResult(requestCode, resultCode, data); 
 	  Log.d(TAG, "Result request code: " + requestCode);
@@ -481,6 +564,13 @@ public class MainActivity extends Activity {
 	  } 
 	}
 	
+	/**
+	 * Helper method to retrieve the contact name from the given
+	 * phone number from a text message.
+	 * 
+	 * @param source
+	 * @return
+	 */
 	private String getContactName(String source){
 		// encode the phone number and build the filter URI
 		Uri contactUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(source));
@@ -500,6 +590,13 @@ public class MainActivity extends Activity {
 		return sourceName;
 	}
 	
+	/**
+	 * Helper method to handle the sending of any bluetooth message,
+	 * pops up a toast notification is the sending of the message was
+	 * succesfull or not.
+	 * 
+	 * @param msg
+	 */
 	public void sendMessage(String msg){
 		String msgType = msg.substring(0, 3);
 		if (btHandler.sendMessage(msg)){

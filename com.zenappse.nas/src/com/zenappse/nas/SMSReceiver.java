@@ -12,14 +12,20 @@ import android.util.Log;
 import android.widget.Toast;
 
 /**
- * @author Patrick
- *
+ * @author Patrick Ganson
+ * @version 1.0
+ * 
+ * Receiver class that handles intercepting text messages
+ * from the Android OS.
  */
 public class SMSReceiver extends BroadcastReceiver {
 
 	private final String TAG = this.getClass().getSimpleName();
 	private MainActivity mainActivity = null;
 	/**
+	 * Constructor that receives a reference to the 
+	 * main activity.
+	 * 
 	 * @param mainActivity 
 	 * 
 	 */
@@ -32,6 +38,12 @@ public class SMSReceiver extends BroadcastReceiver {
 	 * @see android.content.BroadcastReceiver#onReceive(android.content.Context, android.content.Intent)
 	 */
 	@Override
+	/**
+	 * Method that gets called when a text message gets received.
+	 * Handles formatting the message and calls the method in the main
+	 * activity that actually sends the message to the device.
+	 * 
+	 */
 	public void onReceive(Context context, Intent intent) {
 		Bundle extras = intent.getExtras();
 

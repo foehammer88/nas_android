@@ -47,6 +47,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
+/**
+ * @author Patrick
+ * @version 1.0
+ * 
+ * Activity class that contains a ListView object that contains
+ * and displays a list of Alarms that have multiple interactions
+ */
 public class AlarmsActivity extends Activity {
 
 	private static final int ALARM_ID = 0;
@@ -96,7 +103,10 @@ public class AlarmsActivity extends Activity {
 		setupContextMenu();
 	}
 
-	
+	/**
+	 * Populates and adds functionality to the Context Action bar
+	 * to delete multiple Alarms. Contains listeners for the bar.
+	 */
 	private void setupContextMenu() {
 		// TODO Auto-generated method stub
 		alarmsList.setMultiChoiceModeListener(new MultiChoiceModeListener() {
@@ -192,6 +202,9 @@ public class AlarmsActivity extends Activity {
 	}
 
 	@Override
+	/**
+	 * Sets up the Action Bar Menu
+	 */
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
@@ -236,6 +249,11 @@ public class AlarmsActivity extends Activity {
 	}
 	
 	@Override 
+	/**
+	 * When the user returns from adding an alarm, this method stores the ArrayList
+	 * of alarms in the SharedPreferences by the Adapter class
+	 * AlarmStorage.
+	 */
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {     
 	  super.onActivityResult(requestCode, resultCode, data); 
 	  switch(requestCode) { 
@@ -257,6 +275,10 @@ public class AlarmsActivity extends Activity {
 	}
 	
 	@Override
+	/**
+	 * Adds the same functionality as the "Navigate up" button
+	 * on the Action Bar
+	 */
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 	    if (keyCode == KeyEvent.KEYCODE_BACK) {
 	        //moveTaskToBack(true);

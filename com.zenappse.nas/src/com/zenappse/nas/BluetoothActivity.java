@@ -6,6 +6,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 
+/**
+ * @author Patrick Ganson
+ * @version 1.0
+ * 
+ * Stub class for a Bluetooth Activity that lists
+ * Bluetooth devices. Not really needed, but included
+ * in the app. Never gets shown.
+ *
+ */
 public class BluetoothActivity extends Activity {
 
 	@Override

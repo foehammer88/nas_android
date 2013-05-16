@@ -21,8 +21,11 @@ import android.util.Base64OutputStream;
 import android.util.Log;
 
 /**
- * @author Patrick
- *
+ * @author Patrick Ganson
+ * @version 1.0
+ * 
+ * Adapter class that provides the necessary methods to store
+ * the serializable list of alarms in Android's app's SharedPreferences
  */
 public class AlarmStorage {
 
@@ -47,6 +50,10 @@ public class AlarmStorage {
     	Log.d("AlarmStorage", "After edit");
     }
 	
+    /**
+     * Method to store the Alarms List given in the parameter
+     * @param alarms
+     */
     public void storeAlarms(ArrayList<Alarm> alarms) {
     	ObjectOutputStream objectOutput;
         try {
@@ -71,6 +78,10 @@ public class AlarmStorage {
 		
 	}
     
+    /**
+     * Method to retrieve Alarms list from Shared Preferences
+     * @return
+     */
 	public ArrayList<Alarm> retrieveAlarms() {
     	byte[] bytes = mPrefs.getString(key, "{}").getBytes();
         if (bytes.length == 0) {

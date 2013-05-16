@@ -14,6 +14,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+/**
+ * @author Patrick Ganson
+ * @version 1.0
+ * 
+ * Activity controller class for the alarm chooser screen.
+ * Shows a Time Picker object, and returns the Alarm back to
+ * AlarmsActivity
+ */
 public class AlarmActivity extends Activity {
 
 	public TimePicker alarmPicker;
@@ -52,6 +60,10 @@ public class AlarmActivity extends Activity {
 	    }
 	}
 	
+	/**
+	 * Method that captures the time for the alarm, and converts it
+	 * to a format that can be stored in an Alarm object
+	 */
 	public void addAlarm(View view){
 		Log.d("Add Alarm", "Add alarm clicked");
 		// Gets hour in 24 hour format

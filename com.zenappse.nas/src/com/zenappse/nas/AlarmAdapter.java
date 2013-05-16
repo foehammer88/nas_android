@@ -17,8 +17,11 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 /**
- * @author Patrick
- *
+ * @author Patrick Ganson
+ * @version 1.0
+ * 
+ * Adapter class that contains an ArrayList of Alarms
+ * that help display the Alarms list in the AlarmsActivity
  */
 public class AlarmAdapter extends ArrayAdapter<Alarm> {
 
@@ -28,9 +31,7 @@ public class AlarmAdapter extends ArrayAdapter<Alarm> {
 	
 
 	/**
-	 * @param context
-	 * @param textViewResourceId
-	 * @param objects
+	 * Constructor for the object, sets necessary class variables
 	 */
 	public AlarmAdapter(Context context, int layoutResourceId, ArrayList<Alarm> data) {
 		super(context, layoutResourceId, data);
@@ -42,6 +43,10 @@ public class AlarmAdapter extends ArrayAdapter<Alarm> {
 
 
 	@Override
+	/**
+	 * Method that returns the view of an Array List item that is populated
+	 * by the AlarmsActivity
+	 */
 	public View getView(int position, View convertView, ViewGroup parent){
 		LayoutInflater inflater = (LayoutInflater) context .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	    View rowView = inflater.inflate(R.layout.alarm_item_view, parent, false);

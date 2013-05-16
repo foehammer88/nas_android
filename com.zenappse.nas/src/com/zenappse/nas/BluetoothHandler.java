@@ -19,8 +19,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 /**
- * @author Patrick
- *
+ * @author Patrick Ganson
+ * @version 1.0
+ * 
+ * Adapter class to handle all bluetooth communication
+ * with the Notification Alert Device.
  */
 public class BluetoothHandler implements Serializable{
 
@@ -39,6 +42,13 @@ public class BluetoothHandler implements Serializable{
 		
 	}
 	
+	/**
+	 * Initializes the app for bluetooth communication.
+	 * If no bluetooth chip in phone, returns false.
+	 * 
+	 * @param act
+	 * @return
+	 */
 	public boolean initialize(Activity act){
 		this.act = act;
 		if (mBluetoothAdapter == null) {
@@ -60,6 +70,11 @@ public class BluetoothHandler implements Serializable{
 		return deviceName;
 	}
 	
+	/**
+	 * Sets up the bluetooth adapter and retrieves basic information
+	 * of the paired NAS device.
+	 * @return
+	 */
 	public boolean setup(){
 		Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
 		// If there are paired devices
@@ -80,6 +95,13 @@ public class BluetoothHandler implements Serializable{
 		return true;
 	}
 	
+	/**
+	 * Method to actually perform the most important functionality
+	 * of the app. Initializes bluetooth socket for communication.
+	 * Sends the String message parameter to the paired NAS device.
+	 * @param msg
+	 * @return
+	 */
 	public boolean sendMessage(String msg){
 
 		BluetoothSocket btSocket;
@@ -124,13 +146,18 @@ public class BluetoothHandler implements Serializable{
 		return true;
 	}
 
+	/**
+	 * Turns on bluetooth if it is off.
+	 */
 	public void enable(){
 		if (!mBluetoothAdapter.isEnabled()) {
 		    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		    act.startActivityForResult(enableBtIntent, BTENABLER_ID);
 		}
 	}
-	
+	/**
+	 * Turns off bluetooth if it is on.
+	 */
 	public void disable() {
 		if (mBluetoothAdapter.isEnabled()) {
 			mBluetoothAdapter.disable(); 
